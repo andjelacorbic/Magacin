@@ -55,4 +55,19 @@ public class Radnik {
     public void setTelefon(String telefon) {
         this.telefon = telefon;
     }
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Radnik{")
+          .append("id=").append(id)
+          .append(", ime='").append(ime).append('\'')
+          .append(", prezime='").append(prezime).append('\'')
+          .append(", username='").append(username).append('\'')
+          .append(", telefon='").append(telefon).append('\'')
+          .append("}");
+    return sb.toString();
+}
+
+
 }
