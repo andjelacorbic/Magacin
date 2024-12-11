@@ -16,6 +16,20 @@ public class Radnik {
     private String username;
     private String telefon;
 
+    public Radnik(int id, String ime, String prezime, String username, String telefon) {
+        this.id = id;
+        this.ime = ime;
+        this.prezime = prezime;
+        this.username = username;
+        this.telefon = telefon;
+    }
+
+    public Radnik() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    
+
     public int getId() {
         return id;
     }
