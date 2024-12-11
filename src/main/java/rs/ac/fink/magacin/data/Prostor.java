@@ -58,7 +58,7 @@ public class Prostor {
         sb.append("Prostor{")
           .append("prostorId=").append(prostorId)
           .append(", imeMagacina='").append(imeMagacina).append('\'')
-          .append(", radnik=").append(radnik != null ? radnik.getId() : "null") // Prikaz ID-a radnika ako postoji
+          .append(", radnik=").append(radnik != null ? radnik.getId() : "null") 
           .append('}');
         return sb.toString();
     }
