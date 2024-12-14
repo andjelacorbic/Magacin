@@ -15,6 +15,10 @@ public class Radnik {
     private String prezime;
     private String username;
     private String telefon;
+    
+     public Radnik() {
+    }
+
 
     public Radnik(int id, String ime, String prezime, String username, String telefon) {
         this.id = id;
@@ -24,11 +28,15 @@ public class Radnik {
         this.telefon = telefon;
     }
 
-    public Radnik() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Radnik(String ime, String prezime, String username, String telefon) {
+        this.ime = ime;
+        this.prezime = prezime;
+        this.username = username;
+        this.telefon = telefon;
     }
+
     
-    
+  
 
     public int getId() {
         return id;

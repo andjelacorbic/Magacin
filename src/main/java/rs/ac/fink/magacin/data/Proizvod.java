@@ -19,6 +19,9 @@ public class Proizvod {
     private String napomena;
     private Prostor prostor; 
 
+    public Proizvod() {
+    }
+
    
     public Proizvod(int proizvodId, String naziv, String tip, String tezina, int kolicina, String napomena, Prostor prostor) {
         this.proizvodId = proizvodId;
@@ -113,4 +116,3 @@ public class Proizvod {
         return sb.toString();
     }
 }
-

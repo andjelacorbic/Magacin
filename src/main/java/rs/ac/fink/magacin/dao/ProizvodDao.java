@@ -33,11 +33,11 @@ public class ProizvodDao {
         ResultSet rs = null;
         Proizvod proizvod = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM proizvod WHERE proizvod_id = ?");
+            ps = con.prepareStatement("SELECT * FROM proizvod WHERE proizvodId = ?");
             ps.setInt(1, proizvodId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                Prostor prostor = ProstorDao.getInstance().find(rs.getInt("prostor_id"), con); 
+                Prostor prostor = ProstorDao.getInstance().find(rs.getInt("fk_prostor"), con); 
                 proizvod = new Proizvod(
                     proizvodId,
                     rs.getString("naziv"),
@@ -60,7 +60,7 @@ public class ProizvodDao {
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO proizvod (naziv, tip, tezina, kolicina, napomena, prostor_id) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO proizvod (naziv, tip, tezina, kolicina, napomena, fk_prostor) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, proizvod.getNaziv());
             ps.setString(2, proizvod.getTip());
             ps.setString(3, proizvod.getTezina());
@@ -82,7 +82,7 @@ public class ProizvodDao {
     public void update(Proizvod proizvod, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE proizvod SET naziv = ?, tip = ?, tezina = ?, kolicina = ?, napomena = ?, prostor_id = ? WHERE proizvod_id = ?");
+            ps = con.prepareStatement("UPDATE proizvod SET naziv = ?, tip = ?, tezina = ?, kolicina = ?, napomena = ?, fk_prostor = ? WHERE proizvodId = ?");
             ps.setString(1, proizvod.getNaziv());
             ps.setString(2, proizvod.getTip());
             ps.setString(3, proizvod.getTezina());
@@ -100,7 +100,7 @@ public class ProizvodDao {
     public void delete(int proizvodId, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("DELETE FROM proizvod WHERE proizvod_id = ?");
+            ps = con.prepareStatement("DELETE FROM proizvod WHERE proizvodId = ?");
             ps.setInt(1, proizvodId);
             ps.executeUpdate();
         } finally {
@@ -108,4 +108,3 @@ public class ProizvodDao {
         }
     }
 }
-

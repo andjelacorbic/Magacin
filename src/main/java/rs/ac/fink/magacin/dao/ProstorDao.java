@@ -34,14 +34,14 @@ public class ProstorDao {
         ResultSet rs = null;
         Prostor prostor = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM prostor WHERE prostor_id=?");
+            ps = con.prepareStatement("SELECT * FROM prostor WHERE prostorId=?");
             ps.setInt(1, idProstor);
             rs = ps.executeQuery();
             if (rs.next()) {
-                Radnik radnik = RadnikDao.getInstance().find(rs.getInt("radnik_id"), con); 
-                prostor = new Prostor(rs.getString("ime_magacina"), radnik);
-                prostor.setProstorId(rs.getInt("prostor_id"));
-                prostor.setImeMagacina(rs.getString("ime_magacina"));
+                Radnik radnik = RadnikDao.getInstance().find(rs.getInt("fk_radnik"), con); 
+                prostor = new Prostor(rs.getString("imeMagacina"), radnik);
+                prostor.setProstorId(rs.getInt("prostorId"));
+                prostor.setImeMagacina(rs.getString("imeMagacina"));
                 prostor.setRadnik(radnik);
             }
         } finally {
@@ -56,7 +56,7 @@ public class ProstorDao {
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO prostor(ime_magacina, radnik_id) VALUES(?, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps = con.prepareStatement("INSERT INTO prostor(imeMagacina, fk_radnik) VALUES(?, ?)", Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, prostor.getImeMagacina());
             ps.setInt(2, prostor.getRadnik().getId());  
             ps.executeUpdate();
@@ -74,7 +74,7 @@ public class ProstorDao {
     public void update(Prostor prostor, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE prostor SET ime_magacina=?, radnik_id=? WHERE prostor_id=?");
+            ps = con.prepareStatement("UPDATE prostor SET imeMagacina=?, fk_radnik=? WHERE prostorId=?");
             ps.setString(1, prostor.getImeMagacina());
             ps.setInt(2, prostor.getRadnik().getId());
             ps.setInt(3, prostor.getProstorId());
@@ -88,7 +88,7 @@ public class ProstorDao {
     public void delete(int idProstor, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("DELETE FROM prostor WHERE prostor_id=?");
+            ps = con.prepareStatement("DELETE FROM prostor WHERE prostorId=?");
             ps.setInt(1, idProstor);
             ps.executeUpdate();
         } finally {

@@ -15,6 +15,11 @@ public class Prostor {
     private String imeMagacina;
     private Radnik radnik; 
 
+    public Prostor() {
+    }
+    
+    
+
     public Prostor(int prostorId, String imeMagacina, Radnik radnik) {
         this.prostorId = prostorId;
         this.imeMagacina = imeMagacina;
@@ -43,6 +48,9 @@ public class Prostor {
         this.imeMagacina = imeMagacina;
     }
 
+   
+   
+
     public Radnik getRadnik() {
         return radnik;
     }
@@ -63,4 +71,3 @@ public class Prostor {
         return sb.toString();
     }
 }
-
