@@ -11,32 +11,21 @@ public class Radnik {
    
     private int id;
 
-    private String ime;
-    private String prezime;
+    private String imePrezime;
     private String username;
+    private String password;
     private String telefon;
     
-     public Radnik() {
+    public Radnik() {
     }
 
-
-    public Radnik(int id, String ime, String prezime, String username, String telefon) {
+    public Radnik(int id, String imePrezime, String username, String password, String telefon) {
         this.id = id;
-        this.ime = ime;
-        this.prezime = prezime;
+        this.imePrezime = imePrezime;
         this.username = username;
+        this.password = password;
         this.telefon = telefon;
     }
-
-    public Radnik(String ime, String prezime, String username, String telefon) {
-        this.ime = ime;
-        this.prezime = prezime;
-        this.username = username;
-        this.telefon = telefon;
-    }
-
-    
-  
 
     public int getId() {
         return id;
@@ -46,20 +35,29 @@ public class Radnik {
         this.id = id;
     }
 
-    public String getIme() {
-        return ime;
+    public String getImePrezime() {
+        return imePrezime;
     }
 
-    public void setIme(String ime) {
-        this.ime = ime;
+    public void setImePrezime(String imePrezime) {
+        this.imePrezime = imePrezime;
     }
 
-    public String getPrezime() {
-        return prezime;
+    
+    public String getPassword() {
+        return password;
     }
 
-    public void setPrezime(String prezime) {
-        this.prezime = prezime;
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTelefon() {
+        return telefon;
+    }
+
+    public void setTelefon(String telefon) {
+        this.telefon = telefon;
     }
 
     public String getUsername() {
@@ -70,22 +68,16 @@ public class Radnik {
         this.username = username;
     }
 
-    public String getTelefon() {
-        return telefon;
-    }
-
-    public void setTelefon(String telefon) {
-        this.telefon = telefon;
-    }
+  
     
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Radnik{")
           .append("id=").append(id)
-          .append(", ime='").append(ime).append('\'')
-          .append(", prezime='").append(prezime).append('\'')
+          .append(", imePrezime='").append(imePrezime).append('\'')
           .append(", username='").append(username).append('\'')
+          .append(", password='").append(password).append('\'')
           .append(", telefon='").append(telefon).append('\'')
           .append("}");
     return sb.toString();

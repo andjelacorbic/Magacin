@@ -33,17 +33,17 @@ public class ProizvodDao {
         ResultSet rs = null;
         Proizvod proizvod = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM proizvod WHERE proizvodId = ?");
+            ps = con.prepareStatement("SELECT * FROM proizvod WHERE proizvod_id = ?");
             ps.setInt(1, proizvodId);
             rs = ps.executeQuery();
             if (rs.next()) {
-                Prostor prostor = ProstorDao.getInstance().find(rs.getInt("fk_prostor"), con); 
+                Prostor prostor = ProstorDao.getInstance().find(rs.getInt("prostor_id"), con); 
                 proizvod = new Proizvod(
                     proizvodId,
                     rs.getString("naziv"),
                     rs.getString("tip"),
                     rs.getString("tezina"),
-                    rs.getInt("kolicina"),
+                    rs.getString("kolicina"),
                     rs.getString("napomena"),
                     prostor
                 );
@@ -60,13 +60,13 @@ public class ProizvodDao {
         ResultSet rs = null;
         int id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO proizvod (naziv, tip, tezina, kolicina, napomena, fk_prostor) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, proizvod.getNaziv());
-            ps.setString(2, proizvod.getTip());
-            ps.setString(3, proizvod.getTezina());
-            ps.setInt(4, proizvod.getKolicina());
-            ps.setString(5, proizvod.getNapomena());
-            ps.setInt(6, proizvod.getProstor().getProstorId()); 
+            ps = con.prepareStatement("INSERT INTO proizvod (prostor_id, naziv, tip, tezina, kolicina, napomena) VALUES (?, ?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, proizvod.getProstorId().getProstorId());
+            ps.setString(2, proizvod.getNaziv());
+            ps.setString(3, proizvod.getTip());
+            ps.setString(4, proizvod.getTezina());
+            ps.setString(5, proizvod.getKolicina());
+            ps.setString(6, proizvod.getNapomena());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -82,13 +82,13 @@ public class ProizvodDao {
     public void update(Proizvod proizvod, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE proizvod SET naziv = ?, tip = ?, tezina = ?, kolicina = ?, napomena = ?, fk_prostor = ? WHERE proizvodId = ?");
-            ps.setString(1, proizvod.getNaziv());
-            ps.setString(2, proizvod.getTip());
-            ps.setString(3, proizvod.getTezina());
-            ps.setInt(4, proizvod.getKolicina());
-            ps.setString(5, proizvod.getNapomena());
-            ps.setInt(6, proizvod.getProstor().getProstorId()); 
+            ps = con.prepareStatement("UPDATE proizvod SET prostor_id = ?, naziv = ?, tip = ?, tezina = ?, kolicina = ?, napomena = ? WHERE proizvod_id = ?");
+            ps.setInt(1, proizvod.getProstorId().getProstorId()); 
+            ps.setString(2, proizvod.getNaziv());
+            ps.setString(3, proizvod.getTip());
+            ps.setString(4, proizvod.getTezina());
+            ps.setString(5, proizvod.getKolicina());
+            ps.setString(6, proizvod.getNapomena());
             ps.setInt(7, proizvod.getProizvodId());
             ps.executeUpdate();
         } finally {
@@ -100,7 +100,7 @@ public class ProizvodDao {
     public void delete(int proizvodId, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("DELETE FROM proizvod WHERE proizvodId = ?");
+            ps = con.prepareStatement("DELETE FROM proizvod WHERE proizvod_id = ?");
             ps.setInt(1, proizvodId);
             ps.executeUpdate();
         } finally {

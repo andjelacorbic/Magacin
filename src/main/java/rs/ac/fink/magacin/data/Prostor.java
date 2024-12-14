@@ -13,32 +13,23 @@ public class Prostor {
 
     private int prostorId;
     private String imeMagacina;
-    private Radnik radnik; 
+    private Radnik radnikId; 
 
     public Prostor() {
     }
-    
-    
 
-    public Prostor(int prostorId, String imeMagacina, Radnik radnik) {
+    public Prostor(int prostorId, String imeMagacina, Radnik radnikId) {
         this.prostorId = prostorId;
         this.imeMagacina = imeMagacina;
-        this.radnik = radnik;
+        this.radnikId = radnikId;
     }
 
-    public Prostor(String imeMagacina, Radnik radnik) {
+    public Prostor(String imeMagacina, Radnik radnikId) {
         this.imeMagacina = imeMagacina;
-        this.radnik = radnik;
+        this.radnikId = radnikId;
     }
-
     
-    public int getProstorId() {
-        return prostorId;
-    }
-
-    public void setProstorId(int prostorId) {
-        this.prostorId = prostorId;
-    }
+    
 
     public String getImeMagacina() {
         return imeMagacina;
@@ -48,25 +39,31 @@ public class Prostor {
         this.imeMagacina = imeMagacina;
     }
 
-   
-   
-
-    public Radnik getRadnik() {
-        return radnik;
+    public int getProstorId() {
+        return prostorId;
     }
 
-    public void setRadnik(Radnik radnik) {
-        this.radnik = radnik;
+    public void setProstorId(int prostorId) {
+        this.prostorId = prostorId;
     }
 
+    public Radnik getRadnikId() {
+        return radnikId;
+    }
+
+    public void setRadnikId(Radnik radnikId) {
+        this.radnikId = radnikId;
+    }
     
+   
+ 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Prostor{")
           .append("prostorId=").append(prostorId)
           .append(", imeMagacina='").append(imeMagacina).append('\'')
-          .append(", radnik=").append(radnik != null ? radnik.getId() : "null") 
+          .append(", radnikId=").append(radnikId != null ? radnikId.getId() : "null") 
           .append('}');
         return sb.toString();
     }

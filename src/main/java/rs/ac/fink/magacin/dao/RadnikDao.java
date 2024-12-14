@@ -33,15 +33,15 @@ public class RadnikDao {
         ResultSet rs = null;
         Radnik radnik = null;
         try {
-            ps = con.prepareStatement("SELECT * FROM radnik WHERE id=?");
+            ps = con.prepareStatement("SELECT * FROM radnik WHERE radnik_id=?");
             ps.setInt(1, idRadnik);
             rs = ps.executeQuery();
             if (rs.next()) {
                 radnik = new Radnik();
-                radnik.setId(rs.getInt("id"));
-                radnik.setIme(rs.getString("ime"));
-                radnik.setPrezime(rs.getString("prezime"));
+                radnik.setId(rs.getInt("radnik_id"));
+                radnik.setImePrezime(rs.getString("ime_i_prezime"));
                 radnik.setUsername(rs.getString("username"));
+                radnik.setPassword(rs.getString("password"));
                 radnik.setTelefon(rs.getString("telefon"));
             }
         } finally {
@@ -54,32 +54,32 @@ public class RadnikDao {
     public int insert(Radnik radnik, Connection con) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
-        int id = -1;
+        int radnik_id = -1;
         try {
-            ps = con.prepareStatement("INSERT INTO radnik(ime, prezime, username, telefon) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, radnik.getIme());
-            ps.setString(2, radnik.getPrezime());
-            ps.setString(3, radnik.getUsername());
+            ps = con.prepareStatement("INSERT INTO radnik(ime_i_prezime, username, password, telefon) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, radnik.getImePrezime());
+            ps.setString(2, radnik.getUsername());
+            ps.setString(3, radnik.getPassword());
             ps.setString(4, radnik.getTelefon());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                id = rs.getInt(1);
+                radnik_id = rs.getInt(1);
             }
         } finally {
             ResourcesManager.closeResources(rs, ps);
         }
-        return id;
+        return radnik_id;
     }
 
     
     public void update(Radnik radnik, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("UPDATE radnik SET ime=?, prezime=?, username=?, telefon=? WHERE id=?");
-            ps.setString(1, radnik.getIme());
-            ps.setString(2, radnik.getPrezime());
-            ps.setString(3, radnik.getUsername());
+            ps = con.prepareStatement("UPDATE radnik SET ime_i_prezime=?, username=?, password=?, telefon=? WHERE radnik_id=?");
+            ps.setString(1, radnik.getImePrezime());
+            ps.setString(2, radnik.getUsername());
+            ps.setString(3, radnik.getPassword());
             ps.setString(4, radnik.getTelefon());
             ps.setInt(5, radnik.getId());
             ps.executeUpdate();
@@ -92,7 +92,7 @@ public class RadnikDao {
     public void delete(int idRadnik, Connection con) throws SQLException {
         PreparedStatement ps = null;
         try {
-            ps = con.prepareStatement("DELETE FROM radnik WHERE id=?");
+            ps = con.prepareStatement("DELETE FROM radnik WHERE radnik_id=?");
             ps.setInt(1, idRadnik);
             ps.executeUpdate();
         } finally {

@@ -33,9 +33,8 @@ public class Magacin {
             Proizvod proizvod = proizvodService.findProizvod(101);
             System.out.println("Pronađeni proizvod: " + proizvod);
 
-            // Brisanje testnih podataka
-            obrisiTestProizvode();
-            obrisiTestProstore();
+           
+          
         } catch (Exception e) {
             System.err.println("Greška: " + e.getMessage());
             e.printStackTrace();
@@ -44,8 +43,8 @@ public class Magacin {
 
     private static void dodajTestProstore() throws Exception {
         System.out.println("Dodavanje testnih prostora u bazu...");
-        Radnik radnik1 = new Radnik(1, "Petar", "Petrović", "petar.petrovic", "0641234567");
-        Radnik radnik2 = new Radnik(2, "Jovana", "Jovanović", "jovana.jovanovic", "0639876543");
+        Radnik radnik1 = new Radnik(1, "Petar Petrović", "petar.petrovic", "123", "0641234567");
+        Radnik radnik2 = new Radnik(2, "Jovana Jovanović", "jovana.jovanovic", "123", "0639876543");
 
         Prostor prostor1 = new Prostor(1, "Magacin A", radnik1);
         Prostor prostor2 = new Prostor(2, "Magacin B", radnik2);
@@ -59,25 +58,13 @@ public class Magacin {
         System.out.println("Dodavanje testnih proizvoda u bazu...");
         Prostor prostor = prostorService.findProstor(1);
 
-        Proizvod proizvod1 = new Proizvod(101, "Televizor", "Elektronika", "5", 12, "LCD televizor", prostor);
-        Proizvod proizvod2 = new Proizvod(102, "Frižider", "Bela tehnika", "3", 50, "No Frost tehnologija", prostor);
+        Proizvod proizvod1 = new Proizvod(101, "Televizor", "Elektronika", "5", "12", "LCD televizor", prostor);
+        Proizvod proizvod2 = new Proizvod(102, "Frižider", "Bela tehnika", "3", "50", "No Frost tehnologija", prostor);
 
         proizvodService.addNewProizvod(proizvod1);
         proizvodService.addNewProizvod(proizvod2);
         System.out.println("Testni proizvodi uspešno dodati.");
     }
 
-    private static void obrisiTestProizvode() throws Exception {
-        System.out.println("Brisanje testnih proizvoda iz baze...");
-        proizvodService.deleteProizvod(101);
-        proizvodService.deleteProizvod(102);
-        System.out.println("Testni proizvodi uspešno obrisani.");
-    }
-
-    private static void obrisiTestProstore() throws Exception {
-        System.out.println("Brisanje testnih prostora iz baze...");
-        prostorService.deleteProstor(1);
-        prostorService.deleteProstor(2);
-        System.out.println("Testni prostori uspešno obrisani.");
-    }
+    
 }

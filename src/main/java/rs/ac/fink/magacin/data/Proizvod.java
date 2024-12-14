@@ -15,72 +15,28 @@ public class Proizvod {
     private String naziv;
     private String tip;
     private String tezina;
-    private int kolicina;
+    private String kolicina;
     private String napomena;
-    private Prostor prostor; 
+    private Prostor prostorId; 
 
     public Proizvod() {
     }
 
-   
-    public Proizvod(int proizvodId, String naziv, String tip, String tezina, int kolicina, String napomena, Prostor prostor) {
+    public Proizvod(int proizvodId, String naziv, String tip, String tezina, String kolicina, String napomena, Prostor prostorId) {
         this.proizvodId = proizvodId;
         this.naziv = naziv;
         this.tip = tip;
         this.tezina = tezina;
         this.kolicina = kolicina;
         this.napomena = napomena;
-        this.prostor = prostor;
-    }
-    
-    
-    public Proizvod(String naziv, String tip, String tezina, int kolicina, String napomena, Prostor prostor) {
-        this.naziv = naziv;
-        this.tip = tip;
-        this.tezina = tezina;
-        this.kolicina = kolicina;
-        this.napomena = napomena;
-        this.prostor = prostor;
+        this.prostorId = prostorId;
     }
 
-    
-    public int getProizvodId() {
-        return proizvodId;
-    }
-
-    public void setProizvodId(int proizvodId) {
-        this.proizvodId = proizvodId;
-    }
-
-    public String getNaziv() {
-        return naziv;
-    }
-
-    public void setNaziv(String naziv) {
-        this.naziv = naziv;
-    }
-
-    public String getTip() {
-        return tip;
-    }
-
-    public void setTip(String tip) {
-        this.tip = tip;
-    }
-
-    public String getTezina() {
-        return tezina;
-    }
-
-    public void setTezina(String tezina) {
-        this.tezina = tezina;
-    }
-
-    public int getKolicina() {
+    public String getKolicina() {
         return kolicina;
     }
 
-    public void setKolicina(int kolicina) {
+    public void setKolicina(String kolicina) {
         this.kolicina = kolicina;
     }
 
@@ -92,15 +48,48 @@ public class Proizvod {
         this.napomena = napomena;
     }
 
-    public Prostor getProstor() {
-        return prostor;
+    public String getNaziv() {
+        return naziv;
     }
 
-    public void setProstor(Prostor prostor) {
-        this.prostor = prostor;
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
     }
 
-    
+    public int getProizvodId() {
+        return proizvodId;
+    }
+
+    public void setProizvodId(int proizvodId) {
+        this.proizvodId = proizvodId;
+    }
+
+    public Prostor getProstorId() {
+        return prostorId;
+    }
+
+    public void setProstorId(Prostor prostorId) {
+        this.prostorId = prostorId;
+    }
+
+    public String getTezina() {
+        return tezina;
+    }
+
+    public void setTezina(String tezina) {
+        this.tezina = tezina;
+    }
+
+    public String getTip() {
+        return tip;
+    }
+
+    public void setTip(String tip) {
+        this.tip = tip;
+    }
+
+   
+  
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -111,7 +100,7 @@ public class Proizvod {
           .append(", tezina='").append(tezina).append('\'')
           .append(", kolicina=").append(kolicina)
           .append(", napomena='").append(napomena).append('\'')
-          .append(", prostor=").append(prostor != null ? prostor.getProstorId() : "null") 
+          .append(", prostorId=").append(prostorId != null ? prostorId.getProstorId() : "null") 
           .append('}');
         return sb.toString();
     }

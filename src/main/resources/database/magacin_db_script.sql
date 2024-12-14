@@ -5,46 +5,48 @@ USE `magacin`;
 -- Table `magacin`.`radnik`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `magacin`.`radnik` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `ime` VARCHAR(50) NOT NULL,
-  `prezime` VARCHAR(50) NOT NULL,
-  `username` VARCHAR(50) NOT NULL,
-  `telefon` VARCHAR(15) NOT NULL,
-  PRIMARY KEY (`id`)
+  `radnik_id` INT NOT NULL AUTO_INCREMENT,
+  `ime_i_prezime` VARCHAR(64) NOT NULL,
+  `username` VARCHAR(45) NOT NULL UNIQUE,
+  `password` VARCHAR(88) NOT NULL,
+  `telefon` VARCHAR(45) NOT NULL UNIQUE,
+  PRIMARY KEY (`radnik_id`),
+  UNIQUE INDEX `uq_radnik_username` (`username` ASC),
+  UNIQUE INDEX `uq_radnik_telefon` (`telefon` ASC)
 );
 
 -- -----------------------------------------------------
 -- Table `magacin`.`prostor`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `magacin`.`prostor` (
-  `prostorId` INT NOT NULL AUTO_INCREMENT,
-  `imeMagacina` VARCHAR(100) NOT NULL,
-  `fk_radnik` INT NULL,
-  PRIMARY KEY (`prostorId`),
-  INDEX `fk_prostor_radnik_idx` (`fk_radnik` ASC),
+  `prostor_id` INT NOT NULL AUTO_INCREMENT,
+  `radnik_id` INT NOT NULL,
+  `ime_magacina` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`prostor_id`),
+  INDEX `fk_prostor_radnik_id_idx` (`radnik_id` ASC),
   CONSTRAINT `fk_prostor_radnik`
-    FOREIGN KEY (`fk_radnik`)
-    REFERENCES `magacin`.`radnik` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    FOREIGN KEY (`radnik_id`)
+    REFERENCES `magacin`.`radnik` (`radnik_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
 
 -- -----------------------------------------------------
 -- Table `magacin`.`proizvod`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `magacin`.`proizvod` (
-  `proizvodId` INT NOT NULL AUTO_INCREMENT,
-  `naziv` VARCHAR(100) NOT NULL,
-  `tip` VARCHAR(50) NOT NULL,
-  `tezina` VARCHAR(20) NOT NULL,
-  `kolicina` INT NOT NULL,
-  `napomena` TEXT NULL,
-  `fk_prostor` INT NOT NULL,
-  PRIMARY KEY (`proizvodId`),
-  INDEX `fk_proizvod_prostor_idx` (`fk_prostor` ASC),
+  `proizvod_id` INT NOT NULL AUTO_INCREMENT,
+  `prostor_id` INT NOT NULL,
+  `naziv` VARCHAR(45) NOT NULL,
+  `tip` VARCHAR(45) NOT NULL,
+  `tezina` VARCHAR(45) NULL,
+  `kolicina` INT NULL,
+  `napomena` VARCHAR(80) NULL,
+  PRIMARY KEY (`proizvod_id`),
+  INDEX `fk_proizvod_prostor_id_idx` (`prostor_id` ASC),
   CONSTRAINT `fk_proizvod_prostor`
-    FOREIGN KEY (`fk_prostor`)
-    REFERENCES `magacin`.`prostor` (`prostorId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION
+    FOREIGN KEY (`prostor_id`)
+    REFERENCES `magacin`.`prostor` (`prostor_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
 );
